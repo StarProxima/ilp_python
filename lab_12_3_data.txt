@@ -1,0 +1,5 @@
+kkkk k 1
+oooo o 2
+llll l 3
+rrrr r 4
+iiii i 5

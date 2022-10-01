@@ -10,21 +10,14 @@
 # необходимо вывести соответствующее сообщение об ошибке. Позвольте
 # пользователю вводить значения до тех пор, пока он не оставит ввод пустым.
 
-import sys
-
-if len(sys.argv) < 2:
-    print('Usage: lab_12_3.py filename')
-    sys.exit(1)
-
-filename = sys.argv[1]
 
 elements = {}
 
-with open(filename, 'r') as f:
+with open('lab_12_3_data.txt', 'r') as f:
     for line in f:
         line = line.strip()
         if line:
-            name, symbol, number = line.split()
+            number, symbol, name, = line.split(',')
             elements[name] = (symbol, number)
             elements[symbol] = (name, number)
             elements[number] = (symbol, name)

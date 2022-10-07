@@ -100,3 +100,39 @@ def task4():
     p2 = p1.normolize()
     print(p2)
     print(p2.length())
+
+
+def task5():
+    class Animal():
+        def __init__(self, name):
+            self.name = name
+            print(f"Родилось животное {name}")
+
+        def eat(self):
+            print("Намнём")
+
+        def setName(self, ch_name):
+            self.name = ch_name
+
+        def getName(self):
+            return self.name
+
+        def MakeNoise(self):
+            print(f"{self.name} говорит: Гррр")
+
+    class Cat(Animal):
+        def __init__(self, name, color, weight):
+            super().__init__(name)
+            self.color = color
+            self.weight = weight
+            print("Родился кот")
+
+        def meow(self):
+            print(f"{self.name}: MEEEOWW")
+
+        def MakeNoise(self):
+            print(f"{self.name} говорит: Мяу")
+
+    cat = Cat("Эдвард", "Синий", 1)
+    cat.meow()
+    cat.MakeNoise()

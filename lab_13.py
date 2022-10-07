@@ -52,3 +52,51 @@ def task3():
     print(some_str.get())
     some_str.set("text")
     print(some_str.get())
+
+
+def task4():
+    class Point:
+        def __init__(self, x, y):
+            self.x = x
+            self.y = y
+
+        def __str__(self):
+            return f"({self.x}, {self.y})"
+
+        def __add__(self, other):
+            return Point(self.x + other.x, self.y + other.y)
+
+        def __sub__(self, other):
+            return Point(self.x - other.x, self.y - other.y)
+
+        def __mul__(self, other):
+            return Point(self.x * other.x, self.y * other.y)
+
+        def __truediv__(self, other):
+            return Point(self.x / other.x, self.y / other.y)
+
+        def __floordiv__(self, other):
+            return Point(self.x // other.x, self.y // other.y)
+
+        def __mod__(self, other):
+            return Point(self.x % other.x, self.y % other.y)
+
+        def length(self):
+            return (self.x ** 2 + self.y ** 2) ** 0.5
+
+        def normolize(self):
+            len_ = self.length()
+            return Point(self.x / len_, self.y / len_)
+
+    p1 = Point(5, 2)
+    p2 = Point(1, 4)
+    print(p1 + p2)
+    print(p1 - p2)
+    print(p1 * p2)
+    print(p1 / p2)
+    print(p1 // p2)
+    print(p1 % p2)
+    print(p1.length())
+    p2 = p1.normolize()
+    print(p2)
+    print(p2.length())

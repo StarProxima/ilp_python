@@ -172,3 +172,58 @@ def task6():
     dog = Dog("Собака1", "цвет1", 10)
     dog.meow()
     dog.MakeNoise()
+
+
+def task7():
+    class Animal():
+        def __init__(self, name):
+            self.name = name
+            print(f"Родилось животное {name}")
+
+        def eat(self):
+            print("Намнём")
+
+        def setName(self, ch_name):
+            self.name = ch_name
+
+        def getName(self):
+            return self.name
+
+        def MakeNoise(self):
+            print(f"{self.name} говорит: Гррр")
+
+    class Cat(Animal):
+        def __init__(self, name, color, weight):
+            super().__init__(name)
+            self.color = color
+            self.weight = weight
+            print("Родился кот")
+
+        def meow(self):
+            print(f"{self.name}: MEEEOWW")
+
+        def MakeNoise(self):
+            print(f"{self.name} говорит: Мяу")
+
+    class Dog(Animal):
+        def __init__(self, name, color, weight):
+            super().__init__(name)
+            self.color = color
+            self.weight = weight
+            print("Родилась собака")
+
+        def meow(self):
+            print(f"{self.name}: ГаАаАаВ")
+
+        def MakeNoise(self):
+            print(f"{self.name} говорит: Гав")
+
+    some_cat = Cat("Кот1", "ЦветКота1", 3)
+    some_cat.meow()
+    some_cat.MakeNoise()
+    some_dog = Dog("Собака1", "ЦветСобаки1", 10)
+    some_dog.MakeNoise()
+    some_dog_2 = Dog("Собака2", "ЦветоСобаки2", 5)
+    some_dog_2.MakeNoise()
+    some_animal = Animal("Primary creature")
+    some_animal.MakeNoise()

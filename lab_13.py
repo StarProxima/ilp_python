@@ -35,3 +35,20 @@ def task2():
     animal.setName("Барсик")
     animal.eat()
     animal.MakeNoise()
+
+
+def task3():
+    class StringVar:
+        def __init__(self, str_):
+            self.str_ = str(str_)
+
+        def set(self, new_str):
+            self.str_ = new_str
+
+        def get(self):
+            return self.str_
+
+    some_str = StringVar("abcd")
+    print(some_str.get())
+    some_str.set("text")
+    print(some_str.get())

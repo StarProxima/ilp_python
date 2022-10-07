@@ -227,3 +227,23 @@ def task7():
     some_dog_2.MakeNoise()
     some_animal = Animal("Primary creature")
     some_animal.MakeNoise()
+
+
+def main():
+    print('адание 1:')
+    task1()
+    print('адание 2:')
+    task2()
+    print('адание 3:')
+    task3()
+    print('адание 4:')
+    task4()
+    print('адание 5:')
+    task5()
+    print('адание 6:')
+    task6()
+    print('Задание 7:')
+    task7()
+
+
+main()

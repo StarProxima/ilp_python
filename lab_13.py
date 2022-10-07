@@ -136,3 +136,39 @@ def task5():
     cat = Cat("Эдвард", "Синий", 1)
     cat.meow()
     cat.MakeNoise()
+
+
+def task6():
+    class Animal():
+        def __init__(self, name):
+            self.name = name
+            print(f"Родилось животное {name}")
+
+        def eat(self):
+            print("Намнём")
+
+        def setName(self, ch_name):
+            self.name = ch_name
+
+        def getName(self):
+            return self.name
+
+        def MakeNoise(self):
+            print(f"{self.name} говорит: Гррр")
+
+    class Dog(Animal):
+        def __init__(self, name, color, weight):
+            super().__init__(name)
+            self.color = color
+            self.weight = weight
+            print("Родилась собака")
+
+        def meow(self):
+            print(f"{self.name}: ГаАаАаВ")
+
+        def MakeNoise(self):
+            print(f"{self.name} говорит: Гав")
+
+    dog = Dog("Собака1", "цвет1", 10)
+    dog.meow()
+    dog.MakeNoise()

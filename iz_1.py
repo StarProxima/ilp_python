@@ -30,8 +30,7 @@
 # 8 2
 # При таких исходных данных (вместимость транспортировочного
 # контейнера равна 96 пробирок) компании выгодно открыть лабораторию в
-# пункте
-# 2
+# пункте 2
 # В том случае сумма транспортных затрат составит
 # 1·2 + 3·1 + 5·1 + 6·1 + 8·2 = 32 Ответ: 32
 # В ответе укажите два числа: сначала искомое значение для файла А,
@@ -47,15 +46,44 @@ n, v = map(int, fileA.readline().split())
 
 points = {}
 sumDis = 0
-for i in range(n):
-    line = fileA.readline().strip()
+sumCont = 0
+sumCost = 0
+for line in fileA:
+    line = line.strip()
     if line:
         dis, val = map(int, line.split())
+        containerAmount = ceil(val / v)
         sumDis += dis
-        points[dis] = ceil(val / v)
+        sumCont += containerAmount
+        sumCost += dis*containerAmount
+        points[dis] = containerAmount
 
 
-srDis = sumDis / n
+print(sumDis, sumCont, sumCost)
+srDis = sumCost / sumCont
 print(f'srDis: {srDis}')
+
+laboratory = 0
+minDiff = 0
 for dis, val in points.items():
+    if abs(dis - srDis) < minDiff:
+        laboratory = dis
+        minDiff = val - abs(dis - srDis)
+
+print(f'Laboratory: {laboratory}')
+minCost = sumCost
+
+
+for dis in sorted(points.keys()):
+    cost = 0
+    for dis2, val2 in points.items():
+        cost += abs(dis - dis2) * val2
+    # print(f'lab: {dis} cost: {cost}')
+    if cost < minCost:
+        minCost = cost
+        laboratory = dis
+
+print(f'minCost: {minCost}, laboratory: {laboratory}')
+
+for dis, val in sorted(points.items()):
     print(f' {dis} {val}')

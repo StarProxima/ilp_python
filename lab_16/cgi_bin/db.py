@@ -322,6 +322,22 @@ def add_chief(Fio, WorkExperience):
     execute_insert_commit(sql, data)
 
 
+def edit_chief(ChiefId, Fio, WorkExperience):
+    sql = """
+        UPDATE Chiefs SET Fio = ?, WorkExperience = ? WHERE ChiefId = ?
+    """
+    data = (Fio, WorkExperience, ChiefId)
+    execute_insert_commit(sql, data)
+
+
+def delete_chief(ChiefId):
+    sql = """
+        DELETE FROM Chiefs WHERE ChiefId = ?
+    """
+    data = (ChiefId,)
+    execute_insert_commit(sql, data)
+
+
 def add_post(Name, Location):
     sql = """
         INSERT INTO Posts (Name, Location) VALUES (?, ?)

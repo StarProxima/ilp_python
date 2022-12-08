@@ -14,31 +14,21 @@ msg = ''
 
 form = cgi.FieldStorage()
 
-fio = form.getfirst("FIO")
-work_experience = form.getfirst("WorkExperience")
+id = form.getfirst("ChiefId")
 
-if (fio is not None) and (work_experience is not None):
-    if work_experience.isdigit():
-        db.add_chief(fio, work_experience)
-        fio = None
-        work_experience = None
-        msg = '''
-            <br>
-            <div class="card">
-                <div class="card-body">
-                    Success adding
-                </div>
+
+if (id is not None):
+    db.delete_chief(id,)
+    id = None
+
+    msg = '''
+        <br>
+        <div class="card">
+            <div class="card-body">
+                Success deleting
             </div>
-        '''
-    else:
-        msg = '''
-            <br>
-            <div class="card">
-                <div class="card-body">
-                    WorkExperience should be a number
-                </div>
-            </div>
-        '''
+        </div>
+    '''
 
 template = '''
     <!DOCTYPE html>
@@ -56,14 +46,11 @@ template = '''
             <br>
             <h1>Add chief</h1>
             <div class="ps-4 pe-4">
-                <form method="GET">
-                    <label class="form-label" for="FIO">FIO</label>
-                    <input class="form-control" type="text" name="FIO" required>
+                <form method="PUT">
+                    <label class="form-label" for="ChiefId">ChiefId</label>
+                    <input class="form-control" type="text" name="ChiefId" required>
                     <br>
-                    <label class="form-label" for="WorkExperience">WorkExperience</label>
-                    <input class="form-control" type="text" name="WorkExperience" required>
-                    <br>
-                    <input type="submit" class="btn btn-primary" value="Add">
+                    <input type="submit" class="btn btn-primary" value="Delete">
                 </form>
                 {msg}
         </body>

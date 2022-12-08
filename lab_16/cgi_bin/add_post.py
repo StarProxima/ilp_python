@@ -53,7 +53,7 @@ template = '''
                     <label class="form-label" for="Location">Location</label>
                     <input class="form-control" type="text" name="Location" required>
                     <br>
-                    <input type="submit" class="btn btn-primary" value="Добавить">
+                    <input type="submit" class="btn btn-primary" value="Add">
                 </form>
                 {msg}
         </body>

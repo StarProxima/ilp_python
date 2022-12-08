@@ -180,6 +180,18 @@ def get_all_guards():
     return data
 
 
+def get_all_guards_joined():
+    cur = connect.cursor()
+    cur.execute(
+        "SELECT GuardID, Chiefs.FIO, Guards.FIO, Guards.WorkExperience  FROM Guards JOIN Chiefs ON Guards.ChiefID == Chiefs.ChiefID")
+    data = cur.fetchall()
+    for d in data:
+        print(d)
+
+    cur.close()
+    return data
+
+
 def get_all_onduty():
     cur = connect.cursor()
     cur.execute("SELECT * FROM OnDuty")
@@ -191,9 +203,33 @@ def get_all_onduty():
     return data
 
 
+def get_all_onduty_joined():
+    cur = connect.cursor()
+    cur.execute(
+        "SELECT OnDutyID, Guards.FIO, Posts.Name, Chiefs.FIO, OnDuty.ExitTime FROM OnDuty JOIN Chiefs ON OnDuty.ChiefID == Chiefs.ChiefID JOIN Guards ON OnDuty.GuardID == Guards.GuardID JOIN Posts ON OnDuty.PostID == Posts.PostID")
+    data = cur.fetchall()
+    for d in data:
+        print(d)
+
+    cur.close()
+    return data
+
+
 def get_all_remarks():
     cur = connect.cursor()
     cur.execute("SELECT * FROM Remarks")
+    data = cur.fetchall()
+    for d in data:
+        print(d)
+
+    cur.close()
+    return data
+
+
+def get_all_remarks_joined():
+    cur = connect.cursor()
+    cur.execute(
+        "SELECT RemarkID, Guards.FIO, Posts.Name, Chiefs.FIO, Remark FROM Remarks JOIN Chiefs ON Remarks.ChiefID == Chiefs.ChiefID JOIN Guards ON Remarks.GuardID == Guards.GuardID JOIN Posts ON Remarks.PostID == Posts.PostID")
     data = cur.fetchall()
     for d in data:
         print(d)

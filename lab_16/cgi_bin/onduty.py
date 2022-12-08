@@ -12,7 +12,7 @@ parentdir = os.path.dirname(currentdir)
 
 sys.path.insert(0, parentdir)
 
-items = db.get_all_chiefs()
+items = db.get_all_onduty_joined()
 
 template = '''
     <!DOCTYPE html>
@@ -25,14 +25,16 @@ template = '''
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         </head>
         <body>
-            <h1>Chiefs:</h1>
+            <h1>Onduty:</h1>
             <a class="h3 link-primary" href="/">Go back</a>
             <br>
             <table class="table w-100 mx-4">
                 <tr>
-                    <th>ChiefID</th>
-                    <th>FIO</th>
-                    <th>WorkExperience</th>                    
+                    <th>OnDutyID</th>
+                    <th>Guard</th>
+                    <th>Post</th>   
+                    <th>Chief</th>  
+                    <th>ExitTime</th>                   
                 </tr>
                 {rows_html}
             </table>

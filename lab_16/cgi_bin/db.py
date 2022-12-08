@@ -34,9 +34,9 @@ def chiefs_table(connnect):
     cur = connnect.cursor()
     cur.execute(
         "CREATE TABLE Chiefs("
-        "ChiefID int PRIMARY KEY,"
+        "ChiefID INTEGER PRIMARY KEY,"
         "FIO varchar(100) NOT NULL,"
-        "WorkExperience int NOT NULL )")
+        "WorkExperience INTEGER NOT NULL )")
     connnect.commit()
 
 
@@ -44,7 +44,7 @@ def posts_table(connnect):
     cur = connnect.cursor()
     cur.execute(
         "CREATE TABLE Posts("
-        "PostID int PRIMARY KEY,"
+        "PostID INTEGER PRIMARY KEY,"
         "Name varchar(100) NOT NULL,"
         "Location varchar(100) NOT NULL )")
     connnect.commit()
@@ -54,10 +54,10 @@ def guards_table(connnect):
     cur = connnect.cursor()
     cur.execute(
         "CREATE TABLE Guards("
-        "GuardID int PRIMARY KEY,"
-        "ChiefID int NOT NULL REFERENCES Chiefs(ChiefID) ON UPDATE CASCADE,"
+        "GuardID INTEGER PRIMARY KEY,"
+        "ChiefID INTEGER NOT NULL REFERENCES Chiefs(ChiefID) ON UPDATE CASCADE,"
         "FIO varchar(100) NOT NULL,"
-        "WorkExperience int NOT NULL )")
+        "WorkExperience INTEGER NOT NULL )")
     connnect.commit()
 
 
@@ -65,10 +65,10 @@ def onduty_table(connnect):
     cur = connnect.cursor()
     cur.execute(
         "CREATE TABLE OnDuty("
-        "OnDutyID int PRIMARY KEY,"
-        "GuardID int NOT NULL REFERENCES Guards(GuardID) ON UPDATE CASCADE,"
-        "PostID int NOT NULL REFERENCES Posts(PostID) ON UPDATE CASCADE,"
-        "ChiefID int NOT NULL REFERENCES Chiefs(ChiefID) ON UPDATE CASCADE,"
+        "OnDutyID INTEGER PRIMARY KEY,"
+        "GuardID INTEGER NOT NULL REFERENCES Guards(GuardID) ON UPDATE CASCADE,"
+        "PostID INTEGER NOT NULL REFERENCES Posts(PostID) ON UPDATE CASCADE,"
+        "ChiefID INTEGER NOT NULL REFERENCES Chiefs(ChiefID) ON UPDATE CASCADE,"
         "ExitTime DateTime NOT NULL )")
     connnect.commit()
 
@@ -77,10 +77,10 @@ def remarks_table(connnect):
     cur = connnect.cursor()
     cur.execute(
         "CREATE TABLE Remarks("
-        "RemarkID int PRIMARY KEY,"
-        "GuardID int NOT NULL REFERENCES Guards(GuardID) ON UPDATE CASCADE,"
-        "PostID int NOT NULL REFERENCES Posts(PostID) ON UPDATE CASCADE,"
-        "ChiefID int NOT NULL REFERENCES Chiefs(ChiefID) ON UPDATE CASCADE,"
+        "RemarkID INTEGER PRIMARY KEY,"
+        "GuardID INTEGER NOT NULL REFERENCES Guards(GuardID) ON UPDATE CASCADE,"
+        "PostID INTEGER NOT NULL REFERENCES Posts(PostID) ON UPDATE CASCADE,"
+        "ChiefID INTEGER NOT NULL REFERENCES Chiefs(ChiefID) ON UPDATE CASCADE,"
         "Remark varchar(100) NOT NULL )")
     connnect.commit()
 
@@ -311,4 +311,36 @@ def add_guard(ChiefId, Fio, WorkExperience):
         INSERT INTO Guards (ChiefId, Fio, WorkExperience) VALUES (?, ?, ?)
     """
     data = (ChiefId, Fio, WorkExperience)
+    execute_insert_commit(sql, data)
+
+
+def add_chief(Fio, WorkExperience):
+    sql = """
+        INSERT INTO Chiefs (Fio, WorkExperience) VALUES (?, ?)
+    """
+    data = (Fio, WorkExperience)
+    execute_insert_commit(sql, data)
+
+
+def add_post(Name, Location):
+    sql = """
+        INSERT INTO Posts (Name, Location) VALUES (?, ?)
+    """
+    data = (Name, Location)
+    execute_insert_commit(sql, data)
+
+
+def add_onduty(ChiefId, GuardId, PostId, ExitTime):
+    sql = """
+        INSERT INTO OnDuty (ChiefId, GuardId, PostId, ExitTime) VALUES (?, ?, ?, ?)
+    """
+    data = (ChiefId, GuardId, PostId, ExitTime)
+    execute_insert_commit(sql, data)
+
+
+def add_remark(ChiefId, GuardId, PostId, Remark):
+    sql = """
+        INSERT INTO Remarks (ChiefId, GuardId, PostId, Remark) VALUES (?, ?, ?, ?)
+    """
+    data = (ChiefId, GuardId, PostId, Remark)
     execute_insert_commit(sql, data)

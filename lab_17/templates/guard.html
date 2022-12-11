@@ -15,17 +15,25 @@
 
 <body>
     <div style="margin: 32px;">
-        <h2>Добавить шефа</h2>
+        <h2>Добавление охранника</h2>
         <form method="POST">
             {% csrf_token %}
             <br>
-
             <label class="form-label">ФИО</label>
             <input class="form-control" type="text" name="fio" value="{{ item.fio }}" required>
             <br>
             <label class="form-label">Стаж</label>
-            <input class="form-control" type="number" name="work_experience" value="{{ item.work_experience }}"
-                required>
+            <input class="form-control" type="text" name="work_experience" value="{{ item.work_experience }}" required>
+            <br>
+
+            <label class="form-label">Шеф</label>
+            <select class="form-select" name="chief_id">
+                {% for chief in chiefs %}
+                <option value="{{chief.id}}">
+                    {{chief.fio}}
+                </option>
+                {% endfor %}
+            </select>
             <br>
             <input type="submit" class="btn btn-primary" value="Сохранить">
         </form>

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseNotFound
-from .models import Brend, Chief, Post
+from .models import Brend, Chief, Guard, Post
 from .models import Stock
 from .models import Product
 
@@ -75,8 +75,8 @@ def chiefs(request):
 def add_chief(request):
     if request.method == "POST":
         item = Chief()
-        item.FIO = request.POST.get("FIO")
-        item.WorkExperience = request.POST.get("WorkExperience")
+        item.fio = request.POST.get("fio")
+        item.work_experience = request.POST.get("work_experience")
         item.save()
         return HttpResponseRedirect("/chiefs")
     return render(request, "chief.html")
@@ -85,8 +85,8 @@ def add_chief(request):
 def edit_chief(request, id):
     item = Chief.objects.get(ChiefID=id)
     if request.method == "POST":
-        item.FIO = request.POST.get("FIO")
-        item.WorkExperience = request.POST.get("WorkExperience")
+        item.fio = request.POST.get("fio")
+        item.work_experience = request.POST.get("work_experience")
         item.save()
         return HttpResponseRedirect("/chiefs")
     return render(request, "chief.html", {"item": item})
@@ -106,8 +106,8 @@ def posts(request):
 def add_post(request):
     if request.method == "POST":
         item = Post()
-        item.Name = request.POST.get("Name")
-        item.Location = request.POST.get("Location")
+        item.name = request.POST.get("name")
+        item.location = request.POST.get("location")
         item.save()
         return HttpResponseRedirect("/posts")
     return render(request, "post.html")
@@ -116,8 +116,8 @@ def add_post(request):
 def edit_post(request, id):
     item = Post.objects.get(PostID=id)
     if request.method == "POST":
-        item.Name = request.POST.get("Name")
-        item.Location = request.POST.get("Location")
+        item.name = request.POST.get("name")
+        item.location = request.POST.get("location")
         item.save()
         return HttpResponseRedirect("/posts")
     return render(request, "post.html", {"item": item})
@@ -128,6 +128,39 @@ def delete_post(request, id):
     item.delete()
     return HttpResponseRedirect("/posts")
 
+
+def guards(request):
+    items = Guard.objects.all()
+    return render(request, "guards.html", {"items": items})
+
+
+def add_guard(request):
+    if request.method == "POST":
+        item = Guard()
+
+        item.fio = request.POST.get("fio")
+        item.work_experience = request.POST.get("work_experience")
+        item.chief = Chief.objects.get(id=request.POST.get("chief_id"))
+        item.save()
+        return HttpResponseRedirect("/guards")
+    return render(request, "guard.html", {"chiefs": Chief.objects.all()})
+
+
+def edit_guard(request, id):
+    item = Guard.objects.get(id=id)
+    if request.method == "POST":
+        item.chief = Chief.objects.get(id=request.POST.get("chief_id"))
+        item.fio = request.POST.get("fio")
+        item.work_experience = request.POST.get("work_experience")
+        item.save()
+        return HttpResponseRedirect("/guards")
+    return render(request, "guard.html", {"item": item, "chiefs": Chief.objects.all()})
+
+
+def delete_guard(request, id):
+    item = Guard.objects.get(id=id)
+    item.delete()
+    return HttpResponseRedirect("/guards")
 
 # изменение данных в бд
 

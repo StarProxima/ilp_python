@@ -17,26 +17,28 @@
         <a href="/" class="btn btn-outline-light">На главную</a>
         <br>
         <br>
-        <h1>Список постов</h1>
-        <a href="/add_post/" class="btn btn-outline-primary">Добавить пост</a>
+        <h1>Список охранников</h1>
+        <a href="/add_guard/" class="btn btn-outline-primary">Добавить охранника</a>
         <br>
         <br>
         {% if items.count > 0 %}
         <table class="table w-100 mx-4">
             <thead>
                 <th>ID</th>
-                <th>Название</th>
-                <th>Локация</th>
+                <th>ФИО</th>
+                <th>ФИО Шефа</th>
+                <th>Стаж</th>
                 <th>Действия</th>
             </thead>
             {% for item in items %}
             <tr>
                 <td>{{ item.id }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.location }}</td>
+                <td>{{ item.fio }}</td>
+                <td>{{ item.chief.fio }}</td>
+                <td>{{ item.work_experience }}</td>
                 <td>
-                    <a href="/edit_post/{{ item.id }}" class="btn btn-primary">Редактировать</a>
-                    <a href="/delete_post/{{ item.id }}" class="btn btn-danger">Удалить</a>
+                    <a href="/edit_guard/{{ item.id }}" class="btn btn-primary">Редактировать</a>
+                    <a href="/delete_guard/{{ item.id }}" class="btn btn-danger">Удалить</a>
                 </td>
             </tr>
             {% endfor %}

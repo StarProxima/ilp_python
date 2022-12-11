@@ -22,35 +22,35 @@ class Product(models.Model):
 
 
 class Chief(models.Model):
-    ChiefID = models.IntegerField(primary_key=True)
-    FIO = models.CharField(max_length=100)
-    WorkExperience = models.IntegerField()
+    id = models.IntegerField(primary_key=True)
+    fio = models.CharField(max_length=100)
+    work_experience = models.IntegerField()
 
 
 class Guard(models.Model):
-    GuardID = models.IntegerField(primary_key=True)
-    ChiefID = models.ForeignKey(Chief, models.DO_NOTHING, db_column='ChiefID')
-    FIO = models.CharField(max_length=100)
-    WorkExperience = models.IntegerField()
+    id = models.IntegerField(primary_key=True)
+    chief = models.ForeignKey(Chief, models.DO_NOTHING, db_column='ChiefID')
+    fio = models.CharField(max_length=100)
+    work_experience = models.IntegerField()
 
 
 class Post(models.Model):
-    PostID = models.IntegerField(primary_key=True)
-    Name = models.CharField(max_length=100)
-    Location = models.CharField(max_length=100)
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
 
 
 class OnDuty(models.Model):
-    OnDutyID = models.IntegerField(primary_key=True)
-    GuardID = models.ForeignKey(Guard, models.DO_NOTHING, db_column='GuardID')
-    PostID = models.ForeignKey(Post, models.DO_NOTHING, db_column='PostID')
-    ChiefID = models.ForeignKey(Chief, models.DO_NOTHING, db_column='ChiefID')
-    ExitTime = models.DateTimeField()
+    id = models.IntegerField(primary_key=True)
+    guard = models.ForeignKey(Guard, models.DO_NOTHING, db_column='GuardID')
+    post = models.ForeignKey(Post, models.DO_NOTHING, db_column='PostID')
+    chief = models.ForeignKey(Chief, models.DO_NOTHING, db_column='ChiefID')
+    exit_time = models.DateTimeField()
 
 
 class Remark(models.Model):
-    RemarkID = models.IntegerField(primary_key=True)
-    GuardID = models.ForeignKey(Guard, models.DO_NOTHING, db_column='GuardID')
-    PostID = models.ForeignKey(Post, models.DO_NOTHING, db_column='PostID')
-    ChiefID = models.ForeignKey(Chief, models.DO_NOTHING, db_column='ChiefID')
-    Remark = models.CharField(max_length=100)
+    id = models.IntegerField(primary_key=True)
+    guard = models.ForeignKey(Guard, models.DO_NOTHING, db_column='GuardID')
+    post = models.ForeignKey(Post, models.DO_NOTHING, db_column='PostID')
+    chief = models.ForeignKey(Chief, models.DO_NOTHING, db_column='ChiefID')
+    remark = models.CharField(max_length=100)

@@ -37,6 +37,12 @@ urlpatterns = [
     path("edit_post/<int:id>/", views.edit_post),
     path("delete_post/<int:id>/", views.delete_post),
 
+    path("guards/", views.guards),
+    path("add_guard/", views.add_guard),
+    path("edit_guard/<int:id>/", views.edit_guard),
+    path("delete_guard/<int:id>/", views.delete_guard),
+
+
     path("product/edit/<int:id>/", views.edit),
     path("product/open/<int:id>/", views.allinf),
 

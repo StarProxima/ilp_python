@@ -32,12 +32,12 @@
             </thead>
             {% for item in items %}
             <tr>
-                <td>{{ item.ChiefID }}</td>
-                <td>{{ item.FIO }}</td>
-                <td>{{ item.WorkExperience }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.fio }}</td>
+                <td>{{ item.work_experience }}</td>
                 <td>
-                    <a href="/edit_chief/{{ item.ChiefID }}" class="btn btn-primary">Редактировать</a>
-                    <a href="/delete_chief/{{ item.ChiefID }}" class="btn btn-danger">Удалить</a>
+                    <a href="/edit_chief/{{ item.id }}" class="btn btn-primary">Редактировать</a>
+                    <a href="/delete_chief/{{ item.id }}" class="btn btn-danger">Удалить</a>
                 </td>
             </tr>
             {% endfor %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите город</label><br>
+            <input type="text" name="name_brend" />
+        </p>
+        <p>
+            <label>Введите страну</label><br>
+            <input type="text" name="country" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if brend.count > 0 %}
+    <h2>Список городов и стран</h2>
+    <table>
+        <thead><th>Id</th><th>Название города</th><th>Страна</th><th></th></thead>
+        {% for brends in brend %}
+        <tr>
+            <td>{{ brends.id }}</td>
+            <td>{{ brends.name_brend }}</td>
+            <td>{{ brends.country }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <form method="POST" action="create2/">
+        {% csrf_token %}
+        <p>
+            <label>Введите название отеля</label><br>
+            <input type="text" name="name_stock" />
+        </p>
+        <p>
+            <label>Введите минимальную цену за номер</label><br>
+            <input type="text" name="start_stock" />
+        </p>
+       <p>
+            <label>Введите максимальную цену за номер</label><br>
+            <input type="text" name="finish_stock" />
+        </p>
+       <p>
+            <label>Введите процент скидки для постоянных постояльцев</label><br>
+            <input type="text" name="persent_stock" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if stock.count > 0 %}
+    <h2>Список цен</h2>
+    <table>
+        <thead><th>Id</th><th>Название отеля</th><th>Мин.цена</th><th>Макс.цена</th><th>Процент скидки</th><th></th></thead>
+        {% for stockk in stock %}
+        <tr>
+            <td>{{ stockk.id }}</td>
+            <td>{{ stockk.name_stock }}</td>
+            <td>{{ stockk.start_stock }}</td>
+            <td>{{ stockk.finish_stock}}</td>
+            <td>{{ stockk.persent_stock }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

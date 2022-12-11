@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+
+    <h2>Список отелей</h2>
+    <a href="create/">Добавление отеля</a>
+    <table>
+        <thead><th>id</th><th> Название отеля </th><th></th></thead>
+        {% for products in prod %}
+        <tr>
+            <td>{{ products.id }}</td>
+            <td>{{ products.name_product}}</td>
+            <td>
+                <a href="edit/{{products.id}}">Изменить</a> | <a href="open/{{products.id}}">Показать всё</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

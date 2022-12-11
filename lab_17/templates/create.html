@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <h2>Добавление отеля</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Введите название </label><br>
+            <input type="text" name="name_product" />
+        </p>
+        <p>
+            <label>Введите категорию </label><br>
+            <input type="text" name="catagory" />
+        </p>
+         <p>
+            <label>Введите кол. этажей</label><br>
+            <input type="text" name="type" />
+        </p>
+        <p>
+            <label>Выберите город</label><br>
+            <select name="brend">
+            {% for brends in brend %}
+                <option value="{{brends.id}}">{{brends.name_brend}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label>Выберите страну</label><br>
+            <select name="stock">
+            {% for stocks in stock%}
+                <option value="{{stocks.id}}">{{stocks.name_stock}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+</html>

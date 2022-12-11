@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <h2>Изменение данных об отеле</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Введите название</label><br>
+            <input type="text" name="name_product" value="{{product.name_product}}" />
+        </p>
+        <p>
+            <label>Введите категорию</label><br>
+            <input type="text" name="catagory" value="{{product.catagory}}"/>
+        </p>
+        <p>
+            <label>Введите кол. этажей</label><br>
+            <input type="text" name="type" value="{{product.type}}"/>
+        </p>
+        <p>
+            <label>Выберите местоположение</label><br>
+            <select name="brend">
+            {% for brends in brend %}
+                <option value="{{brends.id}}"
+                {%if brends.id == product.brend_id %}
+                  selected
+                {%endif%}
+            >{{brends.name_brend}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label>Выберите город</label><br>
+            <select name="stock">
+            {% for stocks in stock %}
+                <option value="{{stocks.id}}"
+                {%if stocks.id == product.stock_id %}
+                  selected
+                {%endif%}
+            >{{stocks.name_stock}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+</html>

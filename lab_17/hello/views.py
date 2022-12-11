@@ -1,25 +1,31 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseNotFound
-from .models import Brend
+from .models import Brend, Chief, Post
 from .models import Stock
 from .models import Product
 
 
-
-
-
 def glavn(request):
-    return render(request,"glavnaya.html")
+    return render(request, "glavnaya.html")
 
 # получение данных из бд
+
+
+def chiefs(request):
+    items = Chief.objects.all()
+    return render(request, "chiefs.html", {"items": items})
+
+
 def index(request):
     brend = Brend.objects.all()
     return render(request, "index.html", {"brend": brend})
 
+
 def index2(request):
     stock = Stock.objects.all()
     return render(request, "index2.html", {"stock": stock})
+
 
 def index3(request):
     prod = Product.objects.all()
@@ -34,7 +40,6 @@ def create(request):
         brend.country = request.POST.get("country")
         brend.save()
     return HttpResponseRedirect("/")
-
 
 
 def create2(request):
@@ -60,13 +65,68 @@ def create3(request):
         product.brend_id = request.POST.get("brend")
         product.stock_id = request.POST.get("stock")
         product.save()
+        product
         return HttpResponseRedirect("/")
     # передаем данные в шаблон
 
     return render(request, "create.html", {"brend": brend, "stock": stock})
-# Create your views here.
+
+
+def add_chief(request):
+    if request.method == "POST":
+        item = Chief()
+        item.FIO = request.POST.get("FIO")
+        item.WorkExperience = request.POST.get("WorkExperience")
+        item.save()
+        return HttpResponseRedirect("/chiefs")
+    return render(request, "chief.html")
+
+
+def edit_chief(request, id):
+    item = Chief.objects.get(ChiefID=id)
+    if request.method == "POST":
+        item.FIO = request.POST.get("FIO")
+        item.WorkExperience = request.POST.get("WorkExperience")
+        item.save()
+        return HttpResponseRedirect("/chiefs")
+    return render(request, "chief.html", {"item": item})
+
+
+def delete_chief(request, id):
+    item = Chief.objects.get(ChiefID=id)
+    item.delete()
+    return HttpResponseRedirect("/chiefs")
+
+
+def add_post(request):
+    if request.method == "POST":
+        item = Post()
+        item.PostName = request.POST.get("PostName")
+        item.Salary = request.POST.get("Salary")
+        item.save()
+        return HttpResponseRedirect("/posts")
+    return render(request, "post.html")
+
+
+def edit_post(request, id):
+    item = Post.objects.get(PostID=id)
+    if request.method == "POST":
+        item.PostName = request.POST.get("PostName")
+        item.Salary = request.POST.get("Salary")
+        item.save()
+        return HttpResponseRedirect("/posts")
+    return render(request, "post.html", {"item": item})
+
+
+def delete_post(request, id):
+    item = Post.objects.get(PostID=id)
+    item.delete()
+    return HttpResponseRedirect("/posts")
+
 
 # изменение данных в бд
+
+
 def edit(request, id):
     try:
         product = Product.objects.get(id=id)
@@ -82,10 +142,11 @@ def edit(request, id):
         else:
             brend = Brend.objects.all()
             stock = Stock.objects.all()
-            return render(request, "edit.html", {"brend": brend, "stock":stock,"product":product})
+            return render(request, "edit.html", {"brend": brend, "stock": stock, "product": product})
     except Product.DoesNotExist:
         return HttpResponseNotFound("<h2>Person not found</h2>")
 
+
 def allinf(request, id):
-        product=Product.objects.get(id=id)
-        return render(request, "all_inf.html", {"product": product})
+    product = Product.objects.get(id=id)
+    return render(request, "all_inf.html", {"product": product})

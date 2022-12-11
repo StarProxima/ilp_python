@@ -19,13 +19,18 @@ from hello import views
 urlpatterns = [
     path("", views.glavn),
 
-    path("brend/",views.index),
+    path("brend/", views.index),
     path("brend/create/", views.create),
-    path("stock/",views.index2),
+    path("stock/", views.index2),
     path("stock/create2/", views.create2),
 
-    path("product/",views.index3),
+    path("product/", views.index3),
     path("product/create/", views.create3),
+    path("chiefs/", views.chiefs),
+    path("add_chief/", views.add_chief),
+    path("edit_chief/<int:id>/", views.edit_chief),
+    path("delete_chief/<int:id>/", views.delete_chief),
+
     path("product/edit/<int:id>/", views.edit),
     path("product/open/<int:id>/", views.allinf),
 

@@ -26,10 +26,16 @@ urlpatterns = [
 
     path("product/", views.index3),
     path("product/create/", views.create3),
+
     path("chiefs/", views.chiefs),
     path("add_chief/", views.add_chief),
     path("edit_chief/<int:id>/", views.edit_chief),
     path("delete_chief/<int:id>/", views.delete_chief),
+
+    path("posts/", views.posts),
+    path("add_post/", views.add_post),
+    path("edit_post/<int:id>/", views.edit_post),
+    path("delete_post/<int:id>/", views.delete_post),
 
     path("product/edit/<int:id>/", views.edit),
     path("product/open/<int:id>/", views.allinf),

@@ -14,30 +14,29 @@
 
 <body>
     <div style="margin: 32px;">
-
         <a href="/" class="btn btn-outline-light">На главную</a>
         <br>
         <br>
-        <h1>Список шефов</h1>
-        <a href="/add_chief/" class="btn btn-outline-primary">Добавить шефа</a>
+        <h1>Список постов</h1>
+        <a href="/add_post/" class="btn btn-outline-primary">Добавить пост</a>
         <br>
         <br>
         {% if items.count > 0 %}
         <table class="table w-100 mx-4">
             <thead>
                 <th>ID</th>
-                <th>ФИО</th>
-                <th>Стаж</th>
+                <th>Название</th>
+                <th>Локация</th>
                 <th>Действия</th>
             </thead>
             {% for item in items %}
             <tr>
-                <td>{{ item.ChiefID }}</td>
-                <td>{{ item.FIO }}</td>
-                <td>{{ item.WorkExperience }}</td>
+                <td>{{ item.PostID }}</td>
+                <td>{{ item.Name }}</td>
+                <td>{{ item.Location }}</td>
                 <td>
-                    <a href="/edit_chief/{{ item.ChiefID }}" class="btn btn-primary">Редактировать</a>
-                    <a href="/delete_chief/{{ item.ChiefID }}" class="btn btn-danger">Удалить</a>
+                    <a href="/edit_post/{{ item.PostID }}" class="btn btn-primary">Редактировать</a>
+                    <a href="/delete_post/{{ item.PostID }}" class="btn btn-danger">Удалить</a>
                 </td>
             </tr>
             {% endfor %}

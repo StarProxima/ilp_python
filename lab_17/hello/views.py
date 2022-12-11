@@ -12,11 +12,6 @@ def glavn(request):
 # получение данных из бд
 
 
-def chiefs(request):
-    items = Chief.objects.all()
-    return render(request, "chiefs.html", {"items": items})
-
-
 def index(request):
     brend = Brend.objects.all()
     return render(request, "index.html", {"brend": brend})
@@ -72,6 +67,11 @@ def create3(request):
     return render(request, "create.html", {"brend": brend, "stock": stock})
 
 
+def chiefs(request):
+    items = Chief.objects.all()
+    return render(request, "chiefs.html", {"items": items})
+
+
 def add_chief(request):
     if request.method == "POST":
         item = Chief()
@@ -98,11 +98,16 @@ def delete_chief(request, id):
     return HttpResponseRedirect("/chiefs")
 
 
+def posts(request):
+    items = Post.objects.all()
+    return render(request, "posts.html", {"items": items})
+
+
 def add_post(request):
     if request.method == "POST":
         item = Post()
-        item.PostName = request.POST.get("PostName")
-        item.Salary = request.POST.get("Salary")
+        item.Name = request.POST.get("Name")
+        item.Location = request.POST.get("Location")
         item.save()
         return HttpResponseRedirect("/posts")
     return render(request, "post.html")
@@ -111,8 +116,8 @@ def add_post(request):
 def edit_post(request, id):
     item = Post.objects.get(PostID=id)
     if request.method == "POST":
-        item.PostName = request.POST.get("PostName")
-        item.Salary = request.POST.get("Salary")
+        item.Name = request.POST.get("Name")
+        item.Location = request.POST.get("Location")
         item.save()
         return HttpResponseRedirect("/posts")
     return render(request, "post.html", {"item": item})

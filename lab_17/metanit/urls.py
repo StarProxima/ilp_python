@@ -42,6 +42,11 @@ urlpatterns = [
     path("edit_guard/<int:id>/", views.edit_guard),
     path("delete_guard/<int:id>/", views.delete_guard),
 
+    path("on_duties/", views.on_duties),
+    path("add_on_duty/", views.add_on_duty),
+    path("edit_on_duty/<int:id>/", views.edit_on_duty),
+    path("delete_on_duty/<int:id>/", views.delete_on_duty),
+
 
     path("product/edit/<int:id>/", views.edit),
     path("product/open/<int:id>/", views.allinf),

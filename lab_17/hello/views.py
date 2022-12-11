@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseNotFound
-from .models import Brend, Chief, Guard, Post
+from .models import Brend, Chief, Guard, OnDuty, Post
 from .models import Stock
 from .models import Product
 
@@ -162,7 +162,40 @@ def delete_guard(request, id):
     item.delete()
     return HttpResponseRedirect("/guards")
 
-# изменение данных в бд
+
+def on_duties(request):
+    items = OnDuty.objects.all()
+    return render(request, "on_duties.html", {"items": items})
+
+
+def add_on_duty(request):
+    if request.method == "POST":
+        item = OnDuty()
+        item.guard = Guard.objects.get(id=request.POST.get("guard_id"))
+        item.post = Post.objects.get(id=request.POST.get("post_id"))
+        item.chief = Chief.objects.get(id=request.POST.get("chief_id"))
+        item.exit_time = request.POST.get("exit_time")
+        item.save()
+        return HttpResponseRedirect("/on_duties")
+    return render(request, "on_duty.html", {"guards": Guard.objects.all(), "posts": Post.objects.all(), "chiefs": Chief.objects.all()})
+
+
+def edit_on_duty(request, id):
+    item = OnDuty.objects.get(id=id)
+    if request.method == "POST":
+        item.guard = Guard.objects.get(id=request.POST.get("guard_id"))
+        item.post = Post.objects.get(id=request.POST.get("post_id"))
+        item.chief = Chief.objects.get(id=request.POST.get("chief_id"))
+        item.exit_time = request.POST.get("exit_time")
+        item.save()
+        return HttpResponseRedirect("/on_duties")
+    return render(request, "on_duty.html", {"item": item, "guards": Guard.objects.all(), "posts": Post.objects.all(), "chiefs": Chief.objects.all()})
+
+
+def delete_on_duty(request, id):
+    item = OnDuty.objects.get(id=id)
+    item.delete()
+    return HttpResponseRedirect("/on_duties")
 
 
 def edit(request, id):

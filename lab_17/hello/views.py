@@ -26,7 +26,7 @@ def add_chief(request):
 
 
 def edit_chief(request, id):
-    item = Chief.objects.get(ChiefID=id)
+    item = Chief.objects.get(id=id)
     if request.method == "POST":
         item.fio = request.POST.get("fio")
         item.work_experience = request.POST.get("work_experience")
@@ -36,7 +36,7 @@ def edit_chief(request, id):
 
 
 def delete_chief(request, id):
-    item = Chief.objects.get(ChiefID=id)
+    item = Chief.objects.get(id=id)
     item.delete()
     return HttpResponseRedirect("/chiefs")
 
@@ -57,7 +57,7 @@ def add_post(request):
 
 
 def edit_post(request, id):
-    item = Post.objects.get(PostID=id)
+    item = Post.objects.get(id=id)
     if request.method == "POST":
         item.name = request.POST.get("name")
         item.location = request.POST.get("location")
@@ -67,7 +67,7 @@ def edit_post(request, id):
 
 
 def delete_post(request, id):
-    item = Post.objects.get(PostID=id)
+    item = Post.objects.get(id=id)
     item.delete()
     return HttpResponseRedirect("/posts")
 
